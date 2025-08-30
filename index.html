@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nono Share - منصة مشاركة الأكواد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --primary-color: #7E57C2;
+            --secondary-color: #5E35B1;
+            --accent-color: #FF4081;
+            --success-color: #4CAF50;
+            --danger-color: #F44336;
+            --warning-color: #FFC107;
+            --info-color: #03A9F4;
+            --light-color: #F5F5F5;
+            --dark-color: #263238;
+            --background-color: #f9f9ff;
+            --card-background: #ffffff;
+            --text-color: #37474F;
+            --border-radius: 10px;
+            --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* رأس الصفحة */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: var(--box-shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: black;
+        }
+
+        .btn-info {
+            background-color: var(--info-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(to right, #7E57C2, #5E35B1);
+            border-radius: var(--border-radius);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* نظام البحث والتصفية */
+        .search-filter-section {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+        }
+
+        .filter-select {
+            min-width: 150px;
+        }
+
+        .filter-select select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .sort-select {
+            min-width: 150px;
+        }
+
+        .sort-select select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        /* قسم إضافة كود جديد */
+        .add-code-section {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .add-code-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-code-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(94, 53, 177, 0.3);
+        }
+
+        /* قسم الأكواد المنشورة */
+        .published-codes h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .codes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .code-card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .code-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .code-header {
+            padding: 1.2rem;
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .code-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .code-language {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .language-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .code-content {
+            padding: 1.2rem;
+            position: relative;
+        }
+
+        .code-description {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .code-snippet {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', 'Ubuntu Mono', monospace;
+            overflow: hidden;
+            position: relative;
+            max-height: 180px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .code-snippet::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 40px;
+            background: linear-gradient(transparent, #2d2d2d);
+            pointer-events: none;
+        }
+
+        .code-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .code-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-avatar {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: linear-gradient(to right, var(--accent-color), #FF79A9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        .code-stats {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .code-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .code-stat:hover {
+            color: var(--primary-color);
+        }
+
+        .code-stat.active {
+            color: var(--accent-color);
+        }
+
+        .code-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .action-btn:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .delete-btn:hover {
+            color: var(--danger-color);
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+
+        /* التعليقات */
+        .comments-section {
+            background-color: var(--light-color);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            padding: 1rem;
+            display: none;
+        }
+
+        .comments-section.expanded {
+            display: block;
+        }
+
+        .comments-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .comment {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .comment-date {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        .comment-content {
+            color: var(--dark-color);
+        }
+
+        .add-comment {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+        }
+
+        .comment-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0 1rem;
+            cursor: pointer;
+        }
+
+        /* المودال */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 750px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.6rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--accent-color);
+        }
+
+        .modal-body {
+            padding: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(126, 87, 194, 0.2);
+        }
+
+        .form-control.error {
+            border-color: var(--danger-color);
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .code-editor {
+            background-color: #2d2d2d;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            direction: ltr;
+        }
+
+        #editor {
+            height: 320px;
+            width: 100%;
+            direction: ltr;
+            padding: 1rem;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', 'Ubuntu Mono', monospace;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            border: none;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .modal-footer {
+            padding: 1.2rem 1.8rem;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        /* التذييل */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* رسائل التنبيه */
+        .alert {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: alertFadeIn 0.5s ease;
+        }
+
+        @keyframes alertFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* حالة المستخدم */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* إدارة المستخدمين */
+        .admin-panel {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .admin-panel h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .users-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .user-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .user-card-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .user-card-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-card-role {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .user-card-actions {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* تحميل الصورة */
+        .avatar-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-color);
+        }
+
+        .avatar-upload-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .avatar-upload-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        #avatarInput {
+            display: none;
+        }
+
+        /* لا توجد نتائج */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .no-results h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Verified badge */
+        .verified-badge {
+            color: var(--info-color);
+            margin-right: 0.3rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .codes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-body {
+                padding: 1.2rem;
+            }
+
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .search-filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box, .filter-select, .sort-select {
+                min-width: 100%;
+            }
+
+            .code-stats {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .code-actions {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .action-btn {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- رأس الصفحة -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-code"></i> Nono Share
+            </div>
+            <div class="auth-buttons" id="authButtons">
+                <button class="btn btn-outline" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+                <button class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب
+                </button>
+            </div>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <div class="user-avatar" id="userAvatar" style="background: linear-gradient(to right, var(--accent-color), #FF79A9);">
+                    <i class="fas fa-user" id="avatarIcon"></i>
+                </div>
+                <div class="user-details">
+                    <div class="user-name" id="userName">مستخدم</div>
+                    <div class="user-role" id="userRole">مستخدم عادي</div>
+                    <button class="btn btn-danger btn-sm" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <div class="hero">
+            <h1>منصة Nono Share لمشاركة الأكواد</h1>
+            <p>شارك أكوادك البرمجية مع المجتمع بطريقة سهلة وسريعة</p>
+        </div>
+
+        <!-- رسائل التنبيه -->
+        <div id="alertBox" class="alert"></div>
+
+        <!-- لوحة الأدمن (تظهر فقط للمسؤولين) -->
+        <div class="admin-panel" id="adminPanel" style="display: none;">
+            <h2><i class="fas fa-crown"></i> لوحة المسؤول</h2>
+            <h3>إدارة المستخدمين</h3>
+            <div class="users-list" id="usersList">
+                <!-- سيتم ملء هذا القسم عبر JavaScript -->
+            </div>
+        </div>
+
+        <!-- نظام البحث والتصفية -->
+        <section class="search-filter-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث عن أكواد...">
+            </div>
+            <div class="filter-select">
+                <select id="languageFilter">
+                    <option value="">كل اللغات</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="cpp">C++</option>
+                    <option value="java">Java</option>
+                    <option value="php">PHP</option>
+                    <option value="sql">SQL</option>
+                    <option value="swift">Swift</option>
+                    <option value="kotlin">Kotlin</option>
+                    <option value="rust">Rust</option>
+                    <option value="go">Go</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="gdscript">GDScript</option>
+                </select>
+            </div>
+            <div class="sort-select">
+                <select id="sortSelect">
+                    <option value="newest">الأحدث أولاً</option>
+                    <option value="oldest">الأقدم أولاً</option>
+                    <option value="az">من الأ إلى الياء</option>
+                    <option value="za">من الياء إلى الأ</option>
+                    <option value="most-liked">الأكثر إعجاباً</option>
+                    <option value="most-commented">الأكثر تعليقاً</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- قسم إضافة كود جديد -->
+        <section class="add-code-section">
+            <button id="addCodeBtn" class="add-code-btn">
+                <i class="fas fa-plus-circle"></i> أضف كود جديد
+            </button>
+        </section>
+
+        <!-- قسم الأكواد المنشورة -->
+        <section class="published-codes">
+            <h2>الأكواد المنشورة</h2>
+            <div id="codesContainer" class="codes-grid">
+                <!-- سيتم ملء هذا القسم عبر JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- مودال إضافة كود جديد -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إضافة كود جديد</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="codeForm">
+                    <div class="form-group">
+                        <label for="codeTitle">عنوان الكود</label>
+                        <input type="text" id="codeTitle" class="form-control" placeholder="أدخل عنواناً للكود" required>
+                        <div class="error-message" id="titleError">يرجى إدخال عنوان للكود</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="codeDescription">وصف الكود</label>
+                        <textarea id="codeDescription" class="form-control" placeholder="أدخل وصفاً للكود" required></textarea>
+                        <div class="error-message" id="descriptionError">يرجى إدخال وصف للكود</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="codeLanguage">اختر لغة البرمجة</label>
+                        <select id="codeLanguage" class="form-control" required>
+                            <option value="">-- اختر اللغة --</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="cpp">C++</option>
+                            <option value="java">Java</option>
+                            <option value="php">PHP</option>
+                            <option value="sql">SQL</option>
+                            <option value="swift">Swift</option>
+                            <option value="kotlin">Kotlin</option>
+                            <option value="rust">Rust</option>
+                            <option value="go">Go</option>
+                            <option value="typescript">TypeScript</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="gdscript">GDScript</option>
+                        </select>
+                        <div class="error-message" id="languageError">يرجى اختيار لغة البرمجة</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editor">الكود</label>
+                        <div class="code-editor">
+                            <textarea id="editor" placeholder="أدخل الكود هنا..." required></textarea>
+                        </div>
+                        <div class="error-message" id="codeError">يرجى إدخال الكود</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelBtn" class="btn btn-outline">إلغاء</button>
+                <button id="saveCodeBtn" class="btn btn-primary">حفظ الكود</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال تأكيد الحذف -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تأكيد الحذف</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>هل أنت متأكد من أنك تريد حذف هذا الكود؟ لا يمكن التراجع عن هذه العملية.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteBtn" class="btn btn-outline">إلغاء</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">حذف</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال تسجيل الدخول -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تسجيل الدخول</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">البريد الإلكتروني</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                        <div class="error-message" id="loginEmailError">يرجى إدخال بريد إلكتروني صحيح</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">كلمة المرور</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="أدخل كلمة المرور" required>
+                        <div class="error-message" id="loginPasswordError">يرجى إدخال كلمة المرور</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline close-modal">إلغاء</button>
+                <button id="confirmLoginBtn" class="btn btn-primary">تسجيل الدخول</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال إنشاء حساب -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إنشاء حساب جديد</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">الاسم الكامل</label>
+                        <input type="text" id="registerName" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                        <div class="error-message" id="registerNameError">يرجى إدخال الاسم الكامل</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">البريد الإلكتروني</label>
+                        <input type="email" id="registerEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                        <div class="error-message" id="registerEmailError">يرجى إدخال بريد إلكتروني صحيح</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">كلمة المرور</label>
+                        <input type="password" id="registerPassword" class="form-control" placeholder="أنشئ كلمة مرور قوية" required>
+                        <div class="error-message" id="registerPasswordError">كلمة المرور يجب أن تكون至少 6 أحرف</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerRole">نوع الحساب</label>
+                        <select id="registerRole" class="form-control" disabled>
+                            <option value="user">مستخدم عادي</option>
+                            <option value="admin">مسؤول</option>
+                        </select>
+                        <small style="color: var(--secondary-color);">لإنشاء حساب مسؤول، يجب أن يكون لديك رمز المسؤول</small>
+                    </div>
+                    <div class="form-group" id="adminCodeGroup" style="display: none;">
+                        <label for="adminCode">رمز المسؤول</label>
+                        <input type="password" id="adminCode" class="form-control" placeholder="أدخل رمز المسؤول">
+                        <div class="error-message" id="adminCodeError">رمز المسؤول غير صحيح</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline close-modal">إلغاء</button>
+                <button id="confirmRegisterBtn" class="btn btn-success">إنشاء حساب</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال إعدادات المستخدم -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إعدادات الملف الشخصي</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-upload">
+                    <div class="avatar-preview" id="avatarPreview">
+                        <i class="fas fa-user" id="avatarPreviewIcon"></i>
+                    </div>
+                    <label for="avatarInput" class="avatar-upload-btn">
+                        <i class="fas fa-upload"></i> تغيير الصورة
+                    </label>
+                    <input type="file" id="avatarInput" accept="image/*">
+                </div>
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label for="profileName">الاسم الكامل</label>
+                        <input type="text" id="profileName" class="form-control" required>
+                        <div class="error-message" id="profileNameError">يرجى إدخال الاسم الكامل</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail">البريد الإلكتروني</label>
+                        <input type="email" id="profileEmail" class="form-control" required>
+                        <div class="error-message" id="profileEmailError">يرجى إدخال بريد إلكتروني صحيح</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePassword">كلمة المرور الجديدة (اتركها فارغة إذا لم ترغب في التغيير)</label>
+                        <input type="password" id="profilePassword" class="form-control">
+                        <div class="error-message" id="profilePasswordError">كلمة المرور يجب أن تكون至少 6 أحرف</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline close-modal">إلغاء</button>
+                <button id="saveProfileBtn" class="btn btn-primary">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <p>هذا المشروع مرخص تحت رخصة MIT - 2025</p>
+            <p>المصدر: <a href="." target="_blank">.</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // تهيئة Highlight.js لتلوين الأكواد
+        hljs.highlightAll();
+
+        // المتغيرات العامة
+        const STORAGE_KEY = 'nono_share_snippets';
+        const USERS_KEY = 'nono_share_users';
+        const USER_KEY = 'nono_share_current_user';
+        const COMMENTS_KEY = 'nono_share_comments';
+        const LIKES_KEY = 'nono_share_likes';
+        const FOLLOWS_KEY = 'nono_share_follows';
+        const ADMIN_CODE = '123456'; // رمز المسؤول (يمكن تغييره)
+        
+        let codeSnippets = [];
+        let users = [];
+        let comments = [];
+        let likes = [];
+        let follows = [];
+        let currentDeleteId = null;
+        let currentUser = null;
+        let avatarFile = null;
+        let filteredSnippets = [];
+
+        // DOM Elements
+        const addCodeBtn = document.getElementById('addCodeBtn');
+        const codeModal = document.getElementById('codeModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const profileModal = document.getElementById('profileModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal, #cancelBtn, #cancelDeleteBtn');
+        const saveCodeBtn = document.getElementById('saveCodeBtn');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const confirmLoginBtn = document.getElementById('confirmLoginBtn');
+        const confirmRegisterBtn = document.getElementById('confirmRegisterBtn');
+        const saveProfileBtn = document.getElementById('saveProfileBtn');
+        const codeForm = document.getElementById('codeForm');
+        const codesContainer = document.getElementById('codesContainer');
+        const alertBox = document.getElementById('alertBox');
+        const authButtons = document.getElementById('authButtons');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const userRole = document.getElementById('userRole');
+        const userAvatar = document.getElementById('userAvatar');
+        const avatarIcon = document.getElementById('avatarIcon');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const usersList = document.getElementById('usersList');
+        const registerRole = document.getElementById('registerRole');
+        const adminCodeGroup = document.getElementById('adminCodeGroup');
+        const avatarInput = document.getElementById('avatarInput');
+        const avatarPreview = document.getElementById('avatarPreview');
+        const avatarPreviewIcon = document.getElementById('avatarPreviewIcon');
+        const searchInput = document.getElementById('searchInput');
+        const languageFilter = document.getElementById('languageFilter');
+        const sortSelect = document.getElementById('sortSelect');
+
+        // تعريف رموز وألوان اللغات
+        const languageData = {
+            javascript: { name: 'JavaScript', color: '#F7DF1E', icon: 'JS' },
+            python: { name: 'Python', color: '#3776AB', icon: 'Py' },
+            html: { name: 'HTML', color: '#E34F26', icon: 'HT' },
+            css: { name: 'CSS', color: '#1572B6', icon: 'CS' },
+            cpp: { name: 'C++', color: '#00599C', icon: 'C+' },
+            java: { name: 'Java', color: '#007396', icon: 'Jv' },
+            php: { name: 'PHP', color: '#777BB4', icon: 'PH' },
+            sql: { name: 'SQL', color: '#336791', icon: 'SQ' },
+            swift: { name: 'Swift', color: '#FA7343', icon: 'Sw' },
+            kotlin: { name: 'Kotlin', color: '#7F52FF', icon: 'Kt' },
+            rust: { name: 'Rust', color: '#000000', icon: 'Rs' },
+            go: { name: 'Go', color: '#00ADD8', icon: 'Go' },
+            typescript: { name: 'TypeScript', color: '#3178C6', icon: 'TS' },
+            ruby: { name: 'Ruby', color: '#CC342D', icon: 'Rb' },
+            gdscript: { name: 'GDScript', color: '#478CBF', icon: 'GD' }
+        };
+
+        // أكواد مبدأية لكل لغة
+        const starterCodes = {
+            javascript: '// مثال على كود JavaScript\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet("World"));',
+            python: '# مثال على كود Python\ndef greet(name):\n    return f"Hello, {name}!"\n\nprint(greet("World"))',
+            html: '<!-- مثال على كود HTML -->\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n    <h1>Hello World</h1>\n</body>\n</html>',
+            css: '/* مثال على كود CSS */\nbody {\n    font-family: Arial, sans-serif;\n    margin: 0;\n    padding: 0;\n    background-color: #f0f0f0;\n}',
+            cpp: '// مثال على كود C++\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello World!" << endl;\n    return 0;\n}',
+            java: '// مثال على كود Java\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello World!");\n    }\n}',
+            php: '<?php\n// مثال على كود PHP\n$name = "World";\necho "Hello, " . $name . "!";\n?>',
+            sql: '-- مثال على كود SQL\nSELECT * FROM users WHERE active = 1;',
+            swift: '// مثال على كود Swift\nimport Foundation\n\nfunc greet(name: String) -> String {\n    return "Hello, \\(name)!"\n}\n\nprint(greet(name: "World"))',
+            kotlin: '// مثال على كود Kotlin\nfun main() {\n    val name = "World"\n    println("Hello, $name!")\n}',
+            rust: '// مثال على كود Rust\nfn main() {\n    println!("Hello, World!");\n}',
+            go: '// مثال على كود Go\npackage main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, World!")\n}',
+            typescript: '// مثال على كود TypeScript\nfunction greet(name: string): string {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet("World"));',
+            ruby: '# مثال على كود Ruby\ndef greet(name)\n  "Hello, #{name}!"\nend\n\nputs greet("World")',
+            gdscript: '# مثال على كود GDScript\nextends Node\n\nfunc _ready():\n    print("Hello, World!")'
+        };
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        function initApp() {
+            loadData();
+            checkLoginStatus();
+            renderCodeSnippets();
+            setupEventListeners();
+            addSampleData(); // إضافة بيانات نموذجية للعرض
+        }
+
+        function setupEventListeners() {
+            // فتح وإغلاق المودال
+            addCodeBtn.addEventListener('click', () => openModal(codeModal));
+            loginBtn.addEventListener('click', () => openModal(loginModal));
+            registerBtn.addEventListener('click', () => openModal(registerModal));
+            userAvatar.addEventListener('click', () => openModal(profileModal));
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', closeAllModals);
+            });
+
+            // حفظ الكود
+            saveCodeBtn.addEventListener('click', saveCodeSnippet);
+
+            // تأكيد الحذف
+            confirmDeleteBtn.addEventListener('click', confirmDelete);
+
+            // تسجيل الدخول وإنشاء حساب
+            confirmLoginBtn.addEventListener('click', loginUser);
+            confirmRegisterBtn.addEventListener('click', registerUser);
+            logoutBtn.addEventListener('click', logoutUser);
+            saveProfileBtn.addEventListener('click', saveProfile);
+
+            // تغيير نوع الحساب عند التسجيل
+            registerRole.addEventListener('change', () => {
+                adminCodeGroup.style.display = registerRole.value === 'admin' ? 'block' : 'none';
+            });
+
+            // تحميل صورة المستخدم
+            avatarInput.addEventListener('change', handleAvatarUpload);
+
+            // البحث والتصفية
+            searchInput.addEventListener('input', filterCodeSnippets);
+            languageFilter.addEventListener('change', filterCodeSnippets);
+            sortSelect.addEventListener('change', filterCodeSnippets);
+
+            // التحقق من صحة المدخلات أثناء الكتابة
+            document.getElementById('codeTitle').addEventListener('input', clearError);
+            document.getElementById('codeDescription').addEventListener('input', clearError);
+            document.getElementById('codeLanguage').addEventListener('change', function() {
+                clearError({target: this});
+                // تعيين الكود المبدئي للغة المختارة
+                const code = starterCodes[this.value] || '';
+                document.getElementById('editor').value = code;
+            });
+            document.getElementById('editor').addEventListener('input', clearError);
+        }
+
+        function loadData() {
+            // تحميل الأكواد
+            const storedSnippets = localStorage.getItem(STORAGE_KEY);
+            if (storedSnippets) {
+                codeSnippets = JSON.parse(storedSnippets);
+            }
+
+            // تحميل المستخدمين
+            const storedUsers = localStorage.getItem(USERS_KEY);
+            if (storedUsers) {
+                users = JSON.parse(storedUsers);
+            } else {
+                // إنشاء مستخدم مسؤول افتراضي إذا لم يوجد مستخدمين
+                users = [
+                    {
+                        id: '1',
+                        name: 'مسؤول النظام',
+                        email: 'admin@nono.com',
+                        password: 'admin123',
+                        role: 'admin',
+                        avatar: null,
+                        joined: new Date().toISOString(),
+                        verified: true
+                    }
+                ];
+                saveUsers();
+            }
+
+            // تحميل التعليقات
+            const storedComments = localStorage.getItem(COMMENTS_KEY);
+            if (storedComments) {
+                comments = JSON.parse(storedComments);
+            }
+
+            // تحميل الإعجابات
+            const storedLikes = localStorage.getItem(LIKES_KEY);
+            if (storedLikes) {
+                likes = JSON.parse(storedLikes);
+            }
+
+            // تحميل المتابعات
+            const storedFollows = localStorage.getItem(FOLLOWS_KEY);
+            if (storedFollows) {
+                follows = JSON.parse(storedFollows);
+            }
+        }
+
+        function addSampleData() {
+            // إضافة بيانات نموذجية إذا لم توجد أكواد
+            if (codeSnippets.length === 0) {
+                codeSnippets = [
+                    {
+                        id: '1',
+                        title: 'مثال على كود JavaScript',
+                        description: 'دالة لجمع رقمين في JavaScript',
+                        language: 'javascript',
+                        code: starterCodes.javascript,
+                        createdAt: new Date('2023-01-15').toISOString(),
+                        author: 'مسؤول النظام',
+                        authorId: '1'
+                    },
+                    {
+                        id: '2',
+                        title: 'مثال على كود Python',
+                        description: 'برنامج بسيط لطباعة الأرقام في Python',
+                        language: 'python',
+                        code: starterCodes.python,
+                        createdAt: new Date('2023-02-20').toISOString(),
+                        author: 'مسؤول النظام',
+                        authorId: '1'
+                    },
+                    {
+                        id: '3',
+                        title: 'مثال على كود HTML',
+                        description: 'هيكل صفحة HTML أساسي',
+                        language: 'html',
+                        code: starterCodes.html,
+                        createdAt: new Date('2023-03-10').toISOString(),
+                        author: 'مسؤول النظام',
+                        authorId: '1'
+                    },
+                    {
+                        id: '4',
+                        title: 'مثال على كود GDScript',
+                        description: 'حركة شخصية في Godot',
+                        language: 'gdscript',
+                        code: starterCodes.gdscript,
+                        createdAt: new Date('2023-04-05').toISOString(),
+                        author: 'مسؤول النظام',
+                        authorId: '1'
+                    }
+                ];
+                saveCodeSnippets();
+            }
+            filteredSnippets = [...codeSnippets];
+        }
+
+        function saveCodeSnippets() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(codeSnippets));
+        }
+
+        function saveUsers() {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+
+        function saveComments() {
+            localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
+        }
+
+        function saveLikes() {
+            localStorage.setItem(LIKES_KEY, JSON.stringify(likes));
+        }
+
+        function saveFollows() {
+            localStorage.setItem(FOLLOWS_KEY, JSON.stringify(follows));
+        }
+
+        function checkLoginStatus() {
+            const userJson = localStorage.getItem(USER_KEY);
+            if (userJson) {
+                currentUser = JSON.parse(userJson);
+                authButtons.style.display = 'none';
+                userInfo.style.display = 'flex';
+                userName.textContent = currentUser.name;
+                userRole.textContent = currentUser.role === 'admin' ? 'مسؤول' : 'مستخدم عادي';
+                
+                // تحميل صورة المستخدم إذا كانت موجودة
+                if (currentUser.avatar) {
+                    userAvatar.style.backgroundImage = `url(${currentUser.avatar})`;
+                    userAvatar.innerHTML = '';
+                    avatarIcon.style.display = 'none';
+                }
+                
+                // إظهار لوحة المسؤول إذا كان المستخدم مسؤولاً
+                if (currentUser.role === 'admin') {
+                    adminPanel.style.display = 'block';
+                    renderUsersList();
+                }
+            } else {
+                currentUser = null;
+                authButtons.style.display = 'flex';
+                userInfo.style.display = 'none';
+                adminPanel.style.display = 'none';
+            }
+        }
+
+        function openModal(modal) {
+            modal.style.display = 'flex';
+            
+            // إذا كان مودال الملف الشخصي، يتم تعبئته ببيانات المستخدم
+            if (modal === profileModal && currentUser) {
+                document.getElementById('profileName').value = currentUser.name;
+                document.getElementById('profileEmail').value = currentUser.email;
+                
+                if (currentUser.avatar) {
+                    avatarPreview.style.backgroundImage = `url(${currentUser.avatar})`;
+                    avatarPreview.innerHTML = '';
+                    avatarPreviewIcon.style.display = 'none';
+                } else {
+                    avatarPreview.style.backgroundImage = '';
+                    avatarPreview.innerHTML = '<i class="fas fa-user" id="avatarPreviewIcon"></i>';
+                    avatarPreviewIcon.style.display = 'block';
+                }
+            }
+        }
+
+        function closeAllModals() {
+            codeModal.style.display = 'none';
+            deleteModal.style.display = 'none';
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+            profileModal.style.display = 'none';
+            codeForm.reset();
+            avatarFile = null;
+            clearAllErrors();
+        }
+
+        function clearAllErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.querySelectorAll('.form-control').forEach(el => {
+                el.classList.remove('error');
+            });
+        }
+
+        function clearError(e) {
+            const input = e.target;
+            input.classList.remove('error');
+            const errorElement = document.getElementById(input.id + 'Error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }
+
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorElement = document.getElementById(inputId + 'Error');
+            
+            if (input && errorElement) {
+                input.classList.add('error');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+
+        function saveCodeSnippet() {
+            if (!currentUser) {
+                showAlert('يجب تسجيل الدخول أولاً', 'error');
+                closeAllModals();
+                openModal(loginModal);
+                return;
+            }
+
+            const title = document.getElementById('codeTitle').value;
+            const description = document.getElementById('codeDescription').value;
+            const language = document.getElementById('codeLanguage').value;
+            const code = document.getElementById('editor').value;
+
+            let hasError = false;
+
+            if (!title) {
+                showError('codeTitle', 'يرجى إدخال عنوان للكود');
+                hasError = true;
+            }
+
+            if (!description) {
+                showError('codeDescription', 'يرجى إدخال وصف للكود');
+                hasError = true;
+            }
+
+            if (!language) {
+                showError('codeLanguage', 'يرجى اختيار لغة البرمجة');
+                hasError = true;
+            }
+
+            if (!code) {
+                showError('editor', 'يرجى إدخال الكود');
+                hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
+
+            const newSnippet = {
+                id: Date.now().toString(),
+                title,
+                description,
+                language,
+                code,
+                createdAt: new Date().toISOString(),
+                author: currentUser.name,
+                authorId: currentUser.id
+            };
+
+            codeSnippets.unshift(newSnippet);
+            saveCodeSnippets();
+            filterCodeSnippets();
+            closeAllModals();
+            showAlert('تم حفظ الكود بنجاح', 'success');
+        }
+
+        function filterCodeSnippets() {
+            const searchText = searchInput.value.toLowerCase();
+            const language = languageFilter.value;
+            const sortBy = sortSelect.value;
+
+            filteredSnippets = codeSnippets.filter(snippet => {
+                const matchesSearch = snippet.title.toLowerCase().includes(searchText) ||
+                                    snippet.description.toLowerCase().includes(searchText) ||
+                                    snippet.code.toLowerCase().includes(searchText) ||
+                                    snippet.author.toLowerCase().includes(searchText);
+                
+                const matchesLanguage = !language || snippet.language === language;
+                
+                return matchesSearch && matchesLanguage;
+            });
+
+            // ترتيب النتائج
+            switch(sortBy) {
+                case 'newest':
+                    filteredSnippets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    break;
+                case 'oldest':
+                    filteredSnippets.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                    break;
+                case 'az':
+                    filteredSnippets.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'za':
+                    filteredSnippets.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'most-liked':
+                    filteredSnippets.sort((a, b) => {
+                        const aLikes = likes.filter(like => like.snippetId === a.id).length;
+                        const bLikes = likes.filter(like => like.snippetId === b.id).length;
+                        return bLikes - aLikes;
+                    });
+                    break;
+                case 'most-commented':
+                    filteredSnippets.sort((a, b) => {
+                        const aComments = comments.filter(comment => comment.snippetId === a.id).length;
+                        const bComments = comments.filter(comment => comment.snippetId === b.id).length;
+                        return bComments - aComments;
+                    });
+                    break;
+            }
+
+            renderFilteredCodeSnippets();
+        }
+
+        function renderFilteredCodeSnippets() {
+            if (filteredSnippets.length === 0) {
+                codesContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>لا توجد نتائج</h3>
+                        <p>لم نتمكن من العثور على أي أكواد تطابق بحثك.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            codesContainer.innerHTML = filteredSnippets.map(snippet => {
+                const snippetLikes = likes.filter(like => like.snippetId === snippet.id);
+                const snippetComments = comments.filter(comment => comment.snippetId === snippet.id);
+                const isLiked = currentUser && snippetLikes.some(like => like.userId === currentUser.id);
+                const authorUser = users.find(user => user.id === snippet.authorId);
+                const isFollowing = currentUser && follows.some(follow => follow.followerId === currentUser.id && follow.followingId === snippet.authorId);
+                
+                return `
+                <div class="code-card">
+                    <div class="code-header">
+                        <div class="code-title">${snippet.title}</div>
+                        <div class="code-language">
+                            <span class="language-icon" style="background-color: ${languageData[snippet.language]?.color || '#666'}">${languageData[snippet.language]?.icon || snippet.language.substring(0, 2)}</span>
+                            ${languageData[snippet.language]?.name || snippet.language}
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <p class="code-description">${snippet.description}</p>
+                        <pre class="code-snippet"><code class="language-${snippet.language}">${escapeHtml(snippet.code)}</code></pre>
+                    </div>
+                    <div class="code-meta">
+                        <div class="code-author">
+                            <div class="author-avatar" style="${authorUser?.avatar ? `background-image: url(${authorUser.avatar})` : ''}">
+                                ${authorUser?.avatar ? '' : '<i class="fas fa-user"></i>'}
+                            </div>
+                            ${authorUser?.name || snippet.author}
+                            ${authorUser?.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}
+                        </div>
+                        <div class="code-stats">
+                            <div class="code-stat ${isLiked ? 'active' : ''}" onclick="toggleLike('${snippet.id}')">
+                                <i class="fas fa-heart"></i> <span>${snippetLikes.length}</span>
+                            </div>
+                            <div class="code-stat" onclick="toggleComments('${snippet.id}')">
+                                <i class="fas fa-comment"></i> <span>${snippetComments.length}</span>
+                            </div>
+                            ${currentUser && currentUser.id !== snippet.authorId ? `
+                            <div class="code-stat ${isFollowing ? 'active' : ''}" onclick="toggleFollow('${snippet.authorId}')">
+                                <i class="fas fa-user${isFollowing ? '-check' : '-plus'}"></i>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn view-btn" onclick="viewCode('${snippet.id}')">
+                            <i class="fas fa-eye"></i> عرض
+                        </button>
+                        <button class="action-btn copy-btn" onclick="copyCode('${snippet.id}')">
+                            <i class="fas fa-copy"></i> نسخ
+                        </button>
+                        ${currentUser && (currentUser.id === snippet.authorId || currentUser.role === 'admin') ? `
+                        <button class="action-btn delete-btn" onclick="requestDelete('${snippet.id}')">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                        ` : ''}
+                    </div>
+                    <div class="comments-section" id="comments-${snippet.id}">
+                        <div class="comments-list">
+                            ${snippetComments.map(comment => `
+                                <div class="comment">
+                                    <div class="comment-header">
+                                        <div class="comment-author">
+                                            <i class="fas fa-user"></i> ${comment.author}
+                                        </div>
+                                        <div class="comment-date">${formatDate(comment.createdAt)}</div>
+                                    </div>
+                                    <div class="comment-content">${comment.content}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${currentUser ? `
+                        <div class="add-comment">
+                            <input type="text" class="comment-input" id="comment-input-${snippet.id}" placeholder="أضف تعليقاً...">
+                            <button class="comment-btn" onclick="addComment('${snippet.id}')">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            // إعادة تطبيق التلوين على الأكواد
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+
+        function renderCodeSnippets() {
+            filteredSnippets = [...codeSnippets];
+            renderFilteredCodeSnippets();
+        }
+
+        function renderUsersList() {
+            if (!currentUser || currentUser.role !== 'admin') return;
+            
+            usersList.innerHTML = users.map(user => `
+                <div class="user-card">
+                    <div class="user-card-avatar" style="${user.avatar ? `background-image: url(${user.avatar})` : `background: linear-gradient(to right, var(--accent-color), #FF79A9)`}">
+                        ${user.avatar ? '' : '<i class="fas fa-user"></i>'}
+                    </div>
+                    <div class="user-card-name">${user.name}</div>
+                    <div class="user-card-role">${user.role === 'admin' ? 'مسؤول' : 'مستخدم عادي'}</div>
+                    <div class="user-card-actions">
+                        ${user.id !== currentUser.id ? `
+                        <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                        ` : ''}
+                        ${user.role !== 'admin' ? `
+                        <button class="btn btn-success btn-sm" onclick="makeAdmin('${user.id}')">
+                            <i class="fas fa-crown"></i> جعل مسؤول
+                        </button>
+                        ` : ''}
+                        ${!user.verified ? `
+                        <button class="btn btn-info btn-sm" onclick="verifyUser('${user.id}')">
+                            <i class="fas fa-check-circle"></i> توثيق
+                        </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getLanguageName(langKey) {
+            return languageData[langKey]?.name || langKey;
+        }
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function viewCode(id) {
+            const snippet = codeSnippets.find(s => s.id === id);
+            if (snippet) {
+                alert(`عرض الكود: ${snippet.title}\n\n${snippet.code}`);
+            }
+        }
+
+        function copyCode(id) {
+            const snippet = codeSnippets.find(s => s.id === id);
+            if (snippet) {
+                navigator.clipboard.writeText(snippet.code)
+                    .then(() => {
+                        showAlert('تم نسخ الكود إلى الحافظة', 'success');
+                    })
+                    .catch(err => {
+                        showAlert('فشل نسخ الكود', 'error');
+                    });
+            }
+        }
+
+        function toggleLike(snippetId) {
+            if (!currentUser) {
+                showAlert('يجب تسجيل الدخول أولاً', 'error');
+                openModal(loginModal);
+                return;
+            }
+
+            const existingLikeIndex = likes.findIndex(like => 
+                like.snippetId === snippetId && like.userId === currentUser.id
+            );
+
+            if (existingLikeIndex !== -1) {
+                likes.splice(existingLikeIndex, 1);
+            } else {
+                likes.push({
+                    id: Date.now().toString(),
+                    snippetId,
+                    userId: currentUser.id,
+                    createdAt: new Date().toISOString()
+                });
+            }
+
+            saveLikes();
+            filterCodeSnippets();
+        }
+
+        function toggleComments(snippetId) {
+            const commentsSection = document.getElementById(`comments-${snippetId}`);
+            commentsSection.classList.toggle('expanded');
+        }
+
+        function addComment(snippetId) {
+            if (!currentUser) {
+                showAlert('يجب تسجيل الدخول أولاً', 'error');
+                return;
+            }
+
+            const commentInput = document.getElementById(`comment-input-${snippetId}`);
+            const content = commentInput.value.trim();
+
+            if (!content) {
+                showAlert('يرجى إدخال تعليق', 'error');
+                return;
+            }
+
+            comments.push({
+                id: Date.now().toString(),
+                snippetId,
+                author: currentUser.name,
+                authorId: currentUser.id,
+                content,
+                createdAt: new Date().toISOString()
+            });
+
+            saveComments();
+            commentInput.value = '';
+            filterCodeSnippets();
+            showAlert('تم إضافة التعليق', 'success');
+        }
+
+        function toggleFollow(userId) {
+            if (!currentUser) {
+                showAlert('يجب تسجيل الدخول أولاً', 'error');
+                openModal(loginModal);
+                return;
+            }
+
+            const existingFollowIndex = follows.findIndex(follow => 
+                follow.followerId === currentUser.id && follow.followingId === userId
+            );
+
+            if (existingFollowIndex !== -1) {
+                follows.splice(existingFollowIndex, 1);
+                showAlert('تم إلغاء المتابعة', 'success');
+            } else {
+                follows.push({
+                    id: Date.now().toString(),
+                    followerId: currentUser.id,
+                    followingId: userId,
+                    createdAt: new Date().toISOString()
+                });
+                showAlert('تمت المتابعة', 'success');
+            }
+
+            saveFollows();
+            filterCodeSnippets();
+        }
+
+        function requestDelete(id) {
+            if (!currentUser) {
+                showAlert('يجب تسجيل الدخول أولاً', 'error');
+                return;
+            }
+            
+            const snippet = codeSnippets.find(s => s.id === id);
+            if (snippet && (currentUser.id === snippet.authorId || currentUser.role === 'admin')) {
+                currentDeleteId = id;
+                openModal(deleteModal);
+            } else {
+                showAlert('ليس لديك صلاحية لحذف هذا الكود', 'error');
+            }
+        }
+
+        function confirmDelete() {
+            if (currentDeleteId) {
+                codeSnippets = codeSnippets.filter(s => s.id !== currentDeleteId);
+                saveCodeSnippets();
+                filterCodeSnippets();
+                closeAllModals();
+                showAlert('تم حذف الكود بنجاح', 'success');
+                currentDeleteId = null;
+            }
+        }
+
+        function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            let hasError = false;
+            
+            if (!email) {
+                showError('loginEmail', 'يرجى إدخال البريد الإلكتروني');
+                hasError = true;
+            }
+            
+            if (!password) {
+                showError('loginPassword', 'يرجى إدخال كلمة المرور');
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                localStorage.setItem(USER_KEY, JSON.stringify(user));
+                showAlert('تم تسجيل الدخول بنجاح', 'success');
+                closeAllModals();
+                checkLoginStatus();
+            } else {
+                showAlert('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
+            }
+        }
+
+        function registerUser() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const role = document.getElementById('registerRole').value;
+            const adminCode = document.getElementById('adminCode').value;
+            
+            let hasError = false;
+            
+            if (!name) {
+                showError('registerName', 'يرجى إدخال الاسم الكامل');
+                hasError = true;
+            }
+            
+            if (!email) {
+                showError('registerEmail', 'يرجى إدخال البريد الإلكتروني');
+                hasError = true;
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                showError('registerEmail', 'يرجى إدخال بريد إلكتروني صحيح');
+                hasError = true;
+            }
+            
+            if (!password) {
+                showError('registerPassword', 'يرجى إدخال كلمة المرور');
+                hasError = true;
+            } else if (password.length < 6) {
+                showError('registerPassword', 'كلمة المرور يجب أن تكون至少 6 أحرف');
+                hasError = true;
+            }
+            
+            if (role === 'admin' && adminCode !== ADMIN_CODE) {
+                showError('adminCode', 'رمز المسؤول غير صحيح');
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            if (users.some(u => u.email === email)) {
+                showAlert('هذا البريد الإلكتروني مستخدم بالفعل', 'error');
+                return;
+            }
+            
+            const newUser = {
+                id: Date.now().toString(),
+                name,
+                email,
+                password,
+                role,
+                avatar: null,
+                joined: new Date().toISOString(),
+                verified: false
+            };
+            
+            users.push(newUser);
+            saveUsers();
+            localStorage.setItem(USER_KEY, JSON.stringify(newUser));
+            showAlert('تم إنشاء الحساب بنجاح', 'success');
+            closeAllModals();
+            checkLoginStatus();
+        }
+
+        function logoutUser() {
+            localStorage.removeItem(USER_KEY);
+            showAlert('تم تسجيل الخروج بنجاح', 'success');
+            checkLoginStatus();
+        }
+
+        function handleAvatarUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    showAlert('حجم الصورة يجب أن يكون أقل من 2MB', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    avatarPreview.style.backgroundImage = `url(${event.target.result})`;
+                    avatarPreview.innerHTML = '';
+                    avatarPreviewIcon.style.display = 'none';
+                    avatarFile = file;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+            const password = document.getElementById('profilePassword').value;
+            
+            let hasError = false;
+            
+            if (!name) {
+                showError('profileName', 'يرجى إدخال الاسم الكامل');
+                hasError = true;
+            }
+            
+            if (!email) {
+                showError('profileEmail', 'يرجى إدخال البريد الإلكتروني');
+                hasError = true;
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                showError('profileEmail', 'يرجى إدخال بريد إلكتروني صحيح');
+                hasError = true;
+            }
+            
+            if (password && password.length < 6) {
+                showError('profilePassword', 'كلمة المرور يجب أن تكون至少 6 أحرف');
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            // تحديث بيانات المستخدم
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex].name = name;
+                users[userIndex].email = email;
+                
+                if (password) {
+                    users[userIndex].password = password;
+                }
+                
+                // حفظ الصورة إذا تم تحميلها
+                if (avatarFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        users[userIndex].avatar = event.target.result;
+                        saveUsers();
+                        
+                        // تحديث المستخدم الحالي
+                        currentUser = users[userIndex];
+                        localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+                        checkLoginStatus();
+                    };
+                    reader.readAsDataURL(avatarFile);
+                } else {
+                    saveUsers();
+                    
+                    // تحديث المستخدم الحالي
+                    currentUser = users[userIndex];
+                    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+                    checkLoginStatus();
+                }
+                
+                showAlert('تم تحديث الملف الشخصي بنجاح', 'success');
+                closeAllModals();
+            }
+        }
+
+        function deleteUser(userId) {
+            if (currentUser && currentUser.role === 'admin') {
+                users = users.filter(u => u.id !== userId);
+                saveUsers();
+                renderUsersList();
+                showAlert('تم حذف المستخدم بنجاح', 'success');
+            }
+        }
+
+        function makeAdmin(userId) {
+            if (currentUser && currentUser.role === 'admin') {
+                const user = users.find(u => u.id === userId);
+                if (user) {
+                    user.role = 'admin';
+                    saveUsers();
+                    renderUsersList();
+                    showAlert('تم منح صلاحية المسؤول للمستخدم بنجاح', 'success');
+                }
+            }
+        }
+
+        function verifyUser(userId) {
+            if (currentUser && currentUser.role === 'admin') {
+                const user = users.find(u => u.id === userId);
+                if (user) {
+                    user.verified = true;
+                    saveUsers();
+                    renderUsersList();
+                    showAlert('تم توثيق المستخدم بنجاح', 'success');
+                }
+            }
+        }
+
+        function showAlert(message, type) {
+            alertBox.textContent = message;
+            alertBox.className = `alert alert-${type}`;
+            alertBox.style.display = 'block';
+            
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 3000);
+        }
+
+        // إضافة event listener للنقر خارج المودال لإغلاقه
+        window.addEventListener('click', (e) => {
+            if (e.target === codeModal) {
+                closeAllModals();
+            }
+            if (e.target === deleteModal) {
+                closeAllModals();
+            }
+            if (e.target === loginModal) {
+                closeAllModals();
+            }
+            if (e.target === registerModal) {
+                closeAllModals();
+            }
+            if (e.target === profileModal) {
+                closeAllModals();
+            }
+        });
+    </script>
+</body>
+</html>
